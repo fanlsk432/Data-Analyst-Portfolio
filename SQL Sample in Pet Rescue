@@ -1,0 +1,72 @@
+-- Drop the PETRESCUE table in case it exists
+drop table PETRESCUE;
+-- Create the PETRESCUE table 
+create table PETRESCUE (
+	ID INTEGER NOT NULL,
+	ANIMAL VARCHAR(20),
+	QUANTITY INTEGER,
+	COST DECIMAL(6,2),
+	RESCUEDATE DATE,
+	PRIMARY KEY (ID)
+	);
+-- Insert sample data into PETRESCUE table
+insert into PETRESCUE values 
+	(1,'Cat',9,450.09,'2018-05-29'),
+	(2,'Dog',3,666.66,'2018-06-01'),
+	(3,'Dog',1,100.00,'2018-06-04'),
+	(4,'Parrot',2,50.00,'2018-06-04'),
+	(5,'Dog',1,75.75,'2018-06-10'),
+	(6,'Hamster',6,60.60,'2018-06-11'),
+	(7,'Cat',1,44.44,'2018-06-11'),
+	(8,'Goldfish',24,48.48,'2018-06-14'),
+	(9,'Dog',2,222.22,'2018-06-15');
+	
+-- The total cost of all animal rescues
+SELECT SUM(cost) FROM PETRESCUE;
+
+--The total cost of all animal rescues in a column called SUM_OF_COST.
+SELECT SUM(COST) AS SUM_OF_COST FROM PETRESCUE;
+
+--Displays the maximum quantity of animals rescued
+SELECT MAX(QUANTITY) FROM PETRESCUE;
+
+--Displays the average cost of animals rescued
+SELECT AVG(COST) FROM PETRESCUE;
+
+--Displays the average cost of rescuing a dog
+SELECT AVG(COST/QUANTITY) FROM PETRESCUE
+WHERE ANIMAL = 'Dog';
+
+--Rounded cost of each rescue
+SELECT ROUND(COST) FROM PETRESCUE;
+
+--Length of each animal name
+SELECT LENGTH(ANIMAL) FROM PETRESCUE;
+
+--Animal name in each rescue in uppercase
+SELECT UCASE(ANIMAL) FROM PETRESCUE;
+
+--Animal name in each rescue in uppercase without duplications
+SELECT DISTINCT(UCASE(ANIMAL)) FROM PETRESCUE;
+
+--The day of the month when cats have been rescued
+SELECT DAY(RESCUEDATE) FROM PETRESCUE 
+WHERE ANIMAL = 'Cat';
+
+--The number of rescues on the 5th month
+SELECT SUM(QUANTITY) FROM PETRESCUE WHERE MONTH(RESCUEDATE)='05';
+
+--The number of rescues on the 14th day of the month
+SELECT SUM(QUANTITY) FROM PETRESCUE WHERE DAY(RESCUEDATE)='14';
+
+--The third day from each rescue
+SELECT (RESCUEDATE + 3 DAYS) FROM PETRESCUE;
+
+--The length of time the animals have been rescued
+SELECT (CURRENT DATE - RESCUEDATE) FROM PETRESCUE;
+
+
+
+
+
+
